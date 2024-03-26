@@ -37,3 +37,28 @@ char	*get_next_line(int ft)
 	clean_list(&list);
 	return (line);
 }
+
+t_list	*read_to_node(int fd, int *read_count)
+{
+	t_list	*node;
+
+	node = malloc(sizeof(t_list));
+	if (!node)
+		return (NULL);
+	node->content = malloc(BUFFER_SIZE + 1);
+	if (!node->content)
+	{
+		free(node);
+		return (NULL);
+	}
+	*read_count = read(fd, node->content, BUFFER_SIZE);
+	if (*read_count < 0)
+	{
+		free(node->content);
+		free(node);
+		return (NULL);
+	}
+	node->content[*read_count] = '\0';
+	node->next = NULL;
+	return (node);
+}
