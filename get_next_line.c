@@ -62,3 +62,30 @@ t_list	*read_to_node(int fd, int *read_count)
 	node->next = NULL;
 	return (node);
 }
+
+void	create_list(t_list **list, int fd)
+{
+	t_list	*node;
+	t_list	*head;
+	int		read_count;
+
+	read_count = 1;
+	if (!*list)
+		*list = read_to_node(fd, &read_count);
+	if (*list == NULL)
+		return ;
+	head = *list;
+	while (read_count > 0 && !find_newline(*list))
+	{
+		node = read_to_node(fd, &read_count);
+		if (!node)
+		{
+			free_list(head);
+			*list = NULL;
+			return ;
+		}
+		(*list)->next = node;
+		*list = (*list)->next;
+	}
+	*list = head;
+}
