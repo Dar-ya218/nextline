@@ -89,3 +89,29 @@ void	create_list(t_list **list, int fd)
 	}
 	*list = head;
 }
+
+void	list_to_line(t_list *list, char **line)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!list)
+		return ;
+	create_line(&list, line, 0);
+	if (!*line)
+		return ;
+	while (list && *line)
+	{
+		j = 0;
+		while (list->content[j] && list->content[j] != '\n')
+		{
+			(*line)[i] = list->content[j];
+			i++;
+			j++;
+		}
+		if (list->content[j] == '\n')
+			(*line)[i] = list->content[j];
+		list = list->next;
+	}
+}
