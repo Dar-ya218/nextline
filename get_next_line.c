@@ -115,3 +115,25 @@ void	list_to_line(t_list *list, char **line)
 		list = list->next;
 	}
 }
+
+void	clean_list(t_list **list)
+{
+	t_list	*pass_over;
+	t_list	*last_node;
+
+	last_node = *list;
+	if (!last_node)
+		return ;
+	while (last_node && last_node->next)
+		last_node = last_node->next;
+	pass_over = malloc(sizeof(t_list));
+	if (!pass_over)
+	{
+		free_list(*list);
+		return ;
+	}
+	pass_over->next = NULL;
+	pass_over_node(last_node, &pass_over);
+	free_list(*list);
+	*list = pass_over;
+}
