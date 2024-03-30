@@ -51,6 +51,10 @@ t_list	*read_to_node(int fd, int *read_count)
 		free(node);
 		return (NULL);
 	}
+	/* La función read lee BUFFER_SIZE bytes del archivo fd en node->content,
+	y luego almacena el número de bytes leídos en read_count. Como
+	read_count es un puntero, esto modifica la variable original que se
+	pasó a read_to_node. */
 	*read_count = read(fd, node->content, BUFFER_SIZE);
 	if (*read_count < 0)
 	{
