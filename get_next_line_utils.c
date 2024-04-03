@@ -32,18 +32,31 @@ int	find_newline(t_list *node)
 	return (0);
 }
 
-int	find_newline(t_list *node)
+void	create_line(t_list **list, char **line, int length)
 {
-	int	i;
+	int		j;
+	t_list	*tmp;
 
-	i = 0;
-	if (!node)
-		return (0);
-	while (node->content[i])
+	tmp = *list;
+	if (tmp == NULL)
+		return ;
+	while (tmp)
 	{
-		if (node->content[i] == '\n')
-			return (1);
-		i++;
+		j = 0;
+		while (tmp->content[j] != '\0')
+		{
+			if (tmp->content[j] == '\n')
+			{
+				length++;
+				break ;
+			}
+			length++;
+			j++;
+		}
+		tmp = tmp->next;
 	}
-	return (0);
+	*line = malloc((length + 1) * sizeof(char));
+	if (!*line)
+		return ;
+	(*line)[length] = '\0';
 }
