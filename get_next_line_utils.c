@@ -15,3 +15,35 @@ void	free_list(t_list *list)
 	}
 	list = NULL;
 }
+
+int	find_newline(t_list *node)
+{
+	int	i;
+
+	i = 0;
+	if (!node)
+		return (0);
+	while (node->content[i])
+	{
+		if (node->content[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	find_newline(t_list *node)
+{
+	int	i;
+
+	i = 0;
+	if (!node)
+		return (0);
+	while (node->content[i])
+	{
+		if (node->content[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
