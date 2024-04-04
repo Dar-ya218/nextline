@@ -60,3 +60,31 @@ void	create_line(t_list **list, char **line, int length)
 		return ;
 	(*line)[length] = '\0';
 }
+void	pass_over_node(t_list *list, t_list **pass_over)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (list->content[j])
+		j++;
+	while (list->content[i] && list->content[i] != '\n')
+		i++;
+	if (list->content[i] == '\n')
+		i++;
+	(*pass_over)->content = malloc ((j - i) + 1);
+	if (!(*pass_over)->content)
+	{
+		free(*pass_over);
+		return ;
+	}
+	j = 0;
+	while (list->content[i])
+	{
+		(*pass_over)->content[j] = list->content[i];
+		i++;
+		j++;
+	}
+	(*pass_over)->content[j] = '\0';
+}
