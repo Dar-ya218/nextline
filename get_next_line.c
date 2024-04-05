@@ -3,20 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dabochko <dabochko@student.42barcel>       +#+  +:+       +#+        */
+/*   By: dabochko <dabochko@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/25 15:25:51 by dabochko          #+#    #+#             */
-/*   Updated: 2024/03/25 17:15:21 by dabochko         ###   ########.fr       */
+/*   Updated: 2024/04/05 19:47:38 by dabochko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "get_next_line.h"
 
-char	*get_next_line(int ft)
+char	*get_next_line(int fd)
 {
-	char	*line;
-	static t_lis *list;
+	char			*line;
+	static t_list	*list;
 
-	ine = NULL;
+	line = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		free_list(list);
@@ -27,7 +28,7 @@ char	*get_next_line(int ft)
 	if (!list)
 		return (NULL);
 	list_to_line(list, &line);
-	if (line[0] == '\0' || !line)
+	if (!line || line[0] == '\0')
 	{
 		free_list(list);
 		list = NULL;
@@ -51,10 +52,6 @@ t_list	*read_to_node(int fd, int *read_count)
 		free(node);
 		return (NULL);
 	}
-	/* La función read lee BUFFER_SIZE bytes del archivo fd en node->content,
-	y luego almacena el número de bytes leídos en read_count. Como
-	read_count es un puntero, esto modifica la variable original que se
-	pasó a read_to_node. */
 	*read_count = read(fd, node->content, BUFFER_SIZE);
 	if (*read_count < 0)
 	{
