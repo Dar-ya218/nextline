@@ -6,7 +6,7 @@
 /*   By: dabochko <dabochko@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 19:02:43 by dabochko          #+#    #+#             */
-/*   Updated: 2024/04/05 19:27:38 by dabochko         ###   ########.fr       */
+/*   Updated: 2024/04/08 15:13:35 by dabochko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	create_line(t_list **list, char **line, int length)
 		return ;
 	(*line)[length] = '\0';
 }
+
 void	pass_over_node(t_list *list, t_list **pass_over)
 {
 	int	i;
